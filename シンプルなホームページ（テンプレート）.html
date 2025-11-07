@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>かどのASC | ホームページ</title>
+  <meta name="description" content="シンプル&レスポンシブな個人サイトのテンプレート。プロフィール、実績、連絡先を掲載できます。" />
+  <meta name="format-detection" content="telephone=no" />
+  <!-- OGP / SNS -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="かどのASC | ホームページ" />
+  <meta property="og:description" content="シンプル&レスポンシブな個人サイトのテンプレート。" />
+  <meta property="og:image" content="" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🌟</text></svg>">
+  <style>
+    :root{
+      --bg: #ffffff;
+      --fg: #111827; /* gray-900 */
+      --muted: #6b7280; /* gray-500 */
+      --brand: #2563eb; /* blue-600 */
+      --brand-600: #2563eb;
+      --brand-700: #1d4ed8;
+      --card: #f9fafb; /* gray-50 */
+      --border: #e5e7eb; /* gray-200 */
+      --ring: rgba(37,99,235,.35);
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg: #0b1020;
+        --fg: #e5e7eb;
+        --muted: #9ca3af;
+        --brand: #60a5fa; /* blue-400 */
+        --brand-600: #3b82f6;
+        --brand-700: #2563eb;
+        --card: #0f172a; /* slate-900 */
+        --border: #1f2937;
+        --ring: rgba(96,165,250,.45);
+      }
+    }
+    /* Reset（最小限） */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif; background:var(--bg); color:var(--fg); line-height:1.7}
+    img{max-width:100%; display:block}
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:1080px; margin-inline:auto; padding:0 20px}
+    .btn{display:inline-block; padding:.75rem 1rem; border-radius:12px; background:var(--brand-600); color:#fff; font-weight:600; border:1px solid transparent}
+    .btn:hover{background:var(--brand-700); text-decoration:none}
+    .btn.outline{background:transparent; color:var(--brand-600); border-color:var(--brand-600)}
+    .btn.outline:hover{background:var(--brand-600); color:#fff}
+    .card{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:1.25rem}
+    header{position:sticky; top:0; backdrop-filter:saturate(180%) blur(6px); background-color:color-mix(in oklab, var(--bg) 85%, transparent); border-bottom:1px solid var(--border); z-index:50}
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 0}
+    .brand{display:flex; align-items:center; gap:.6rem; font-weight:800; letter-spacing:.02em}
+    .brand-logo{width:28px; height:28px; border-radius:8px; display:grid; place-items:center; background:var(--brand-600); color:#fff; font-weight:800}
+    .nav-links{display:flex; gap:1rem}
+    .nav-links a{padding:.5rem .75rem; border-radius:10px}
+    .nav-links a:hover{background:var(--card)}
+    .menu-btn{display:none}
+    @media (max-width: 760px){
+      .nav-links{display:none}
+      .menu-btn{display:inline-flex}
+      .mobile-nav{display:none; border-top:1px solid var(--border); padding:.5rem 0}
+      .mobile-nav a{display:block; padding:.75rem; border-radius:10px}
+      .mobile-nav a:hover{background:var(--card)}
+    }
+    /* Hero */
+    .hero{padding:72px 0 48px}
+    .hero-grid{display:grid; grid-template-columns: 1.2fr .8fr; align-items:center; gap:32px}
+    .hero h1{font-size:clamp(28px, 5vw, 44px); line-height:1.2; margin:0}
+    .hero p{font-size:clamp(15px, 2.5vw, 18px); color:var(--muted)}
+    .tags{display:flex; gap:.5rem; flex-wrap:wrap; margin-top:14px}
+    .tag{font-size:12px; border:1px solid var(--border); padding:.25rem .5rem; border-radius:999px; color:var(--muted)}
+    .hero-cta{display:flex; gap:.75rem; margin-top:18px; flex-wrap:wrap}
+    .avatar{width:160px; height:160px; border-radius:28px; overflow:hidden; border:1px solid var(--border); box-shadow:0 6px 30px rgba(0,0,0,.08)}
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns: 1fr; text-align:center}
+      .hero-cta{justify-content:center}
+      .avatar{margin-inline:auto}
+    }
+    /* Sections */
+    section{padding:56px 0}
+    section h2{font-size:clamp(22px, 3.6vw, 30px); margin:0 0 12px}
+    .section-lead{color:var(--muted); margin:0 0 22px}
+    .grid{display:grid; gap:16px}
+    .grid.cards{grid-template-columns: repeat(3, 1fr)}
+    @media (max-width: 920px){ .grid.cards{grid-template-columns: 1fr 1fr} }
+    @media (max-width: 640px){ .grid.cards{grid-template-columns: 1fr} }
+    .work-item h3{margin:.2rem 0 .4rem; font-size:1.05rem}
+    .work-item p{color:var(--muted); font-size:.95rem}
+    /* Contact */
+    form{display:grid; gap:.75rem; max-width:680px}
+    label{font-weight:600; font-size:.95rem}
+    input, textarea{width:100%; padding:.75rem .9rem; border-radius:12px; border:1px solid var(--border); background:transparent; color:var(--fg)}
+    input:focus, textarea:focus{outline:3px solid var(--ring); border-color:var(--brand-600)}
+    textarea{min-height:140px}
+    /* Footer */
+    footer{padding:28px 0; border-top:1px solid var(--border); color:var(--muted)}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  </style>
+</head>
+<body>
+  <a class="sr-only" href="#main">本文へスキップ</a>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">か</div>
+        <span>かどのASC</span>
+      </div>
+      <nav aria-label="メイン">
+        <button class="menu-btn btn outline" id="menuBtn" aria-expanded="false" aria-controls="mobileNav">メニュー</button>
+        <div class="nav-links">
+          <a href="#about">自己紹介</a>
+          <a href="#works">実績</a>
+          <a href="#contact">お問い合わせ</a>
+        </div>
+      </nav>
+    </div>
+    <div class="container mobile-nav" id="mobileNav" hidden>
+      <a href="#about">自己紹介</a>
+      <a href="#works">実績</a>
+      <a href="#contact">お問い合わせ</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero container">
+      <div class="hero-grid">
+        <div>
+          <h1>シンプルで伝わる、<br/>あなたのためのホームページ</h1>
+          <p>このテンプレートは、1ファイルで完結する軽量な個人サイトです。プロフィール、実績、問い合わせをすぐに公開できます。</p>
+          <div class="tags">
+            <span class="tag">#Web制作</span>
+            <span class="tag">#デザイン</span>
+            <span class="tag">#ポートフォリオ</span>
+          </div>
+          <div class="hero-cta">
+            <a class="btn" href="#contact">お問い合わせ</a>
+            <a class="btn outline" href="#works">実績を見る</a>
+          </div>
+        </div>
+        <div>
+          <figure class="avatar" aria-label="プロフィール画像">
+            <!-- 好きな画像に差し替えてください -->
+            <svg viewBox="0 0 300 300" width="300" height="300" role="img" aria-label="プレースホルダー画像">
+              <defs>
+                <linearGradient id="g" x1="0" x2="1">
+                  <stop offset="0%" stop-color="#93c5fd"/>
+                  <stop offset="100%" stop-color="#3b82f6"/>
+                </linearGradient>
+              </defs>
+              <rect width="300" height="300" fill="url(#g)"/>
+              <circle cx="150" cy="120" r="60" fill="#fff" opacity=".85"/>
+              <rect x="75" y="200" width="150" height="70" rx="35" fill="#fff" opacity=".85"/>
+            </svg>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <h2>自己紹介</h2>
+        <p class="section-lead">会員の親睦を深めながら様々な活動を通じて地域貢献活動を行っています。</p>
+        <div class="grid cards" role="list">
+          <article class="card" role="listitem">
+            <h3>スキル</h3>
+            <p>HTML/CSS、JavaScript、デザイン、ライティング など</p>
+          </article>
+          <article class="card" role="listitem">
+            <h3>経歴</h3>
+            <p>◯◯年からフリーランス。企業サイト、LP、UI設計などを担当。</p>
+          </article>
+          <article class="card" role="listitem">
+            <h3>ミッション</h3>
+            <p>「伝わる」デザインで、見る人の行動を後押しします。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="works">
+      <div class="container">
+        <h2>実績</h2>
+        <p class="section-lead">最近のプロジェクトから一部をご紹介します。</p>
+        <div class="grid cards">
+          <article class="card work-item">
+            <img src="https://picsum.photos/seed/1/800/500" alt="プロジェクトサムネイル1" loading="lazy" />
+            <h3>プロジェクト名 A</h3>
+            <p>LP制作 / デザイン・実装・計測</p>
+          </article>
+          <article class="card work-item">
+            <img src="https://picsum.photos/seed/2/800/500" alt="プロジェクトサムネイル2" loading="lazy" />
+            <h3>プロジェクト名 B</h3>
+            <p>コーポレートサイト改修 / 情報設計</p>
+          </article>
+          <article class="card work-item">
+            <img src="https://picsum.photos/seed/3/800/500" alt="プロジェクトサムネイル3" loading="lazy" />
+            <h3>プロジェクト名 C</h3>
+            <p>ブログ構築 / パフォーマンス改善</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <h2>お問い合わせ</h2>
+        <p class="section-lead">ご依頼・ご相談は下記フォームからどうぞ。内容を入力して送信してください。</p>
+        <form name="contact" onsubmit="return handleSubmit(event)">
+          <div>
+            <label for="name">お名前</label>
+            <input id="name" name="name" type="text" placeholder="山田 太郎" required />
+          </div>
+          <div>
+            <label for="email">メールアドレス</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          </div>
+          <div>
+            <label for="message">メッセージ</label>
+            <textarea id="message" name="message" placeholder="ご相談内容をできるだけ具体的にお書きください" required></textarea>
+          </div>
+          <div>
+            <button class="btn" type="submit">送信する</button>
+          </div>
+          <p id="formStatus" role="status" aria-live="polite" style="margin-top:.5rem; color:var(--muted)"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>© <span id="year"></span> かどのASC. All rights reserved.</small>
+    </div>
+  </footer>
+
+  <script>
+    // 年の自動更新
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // モバイルメニュー
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    menuBtn?.addEventListener('click', () => {
+      const isOpen = mobileNav.hasAttribute('hidden') === false;
+      if (isOpen) {
+        mobileNav.setAttribute('hidden', '');
+      } else {
+        mobileNav.removeAttribute('hidden');
+      }
+      const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', String(!expanded));
+    });
+
+    // フォームの仮送信（実運用ではバックエンドや外部サービスに接続）
+    function handleSubmit(e){
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target).entries());
+      console.log('送信データ', data);
+      const el = document.getElementById('formStatus');
+      el.textContent = 'ありがとうございます！メッセージを受け付けました（デモ動作）';
+      e.target.reset();
+      return false;
+    }
+
+    // スムーススクロール（ネイティブが使えない環境向けフォールバック）
+    if ('scrollBehavior' in document.documentElement.style === false){
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', (ev)=>{
+          const id = a.getAttribute('href').slice(1);
+          const target = document.getElementById(id);
+          if(target){ ev.preventDefault(); window.scrollTo({top: target.offsetTop - 64}); }
+        });
+      });
+    }
+  </script>
+</body>
+</html>
